@@ -4,7 +4,9 @@ layout (triangles) in;
 void main( void )
 {
 	// 39. Set up tesselated vertex coordinates basing one control patches and tesselation ...
-
+	gl_Position += gl_in[0].gl_Position * gl_TessCoord.x;
+	gl_Position += gl_in[1].gl_Position * gl_TessCoord.y;
+	gl_Position += gl_in[2].gl_Position * gl_TessCoord.z;
 
 
 }                                 

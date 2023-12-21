@@ -31,7 +31,7 @@ extern "C" { FILE __iob_func[ 3 ] = { *stdin,*stdout,*stderr }; } // For backwar
 
 //------------------------- Const parameters ------------------------
 // 36, 41. Set up the number of shader programs ...
-#define SHADER_PROGRAM_NUM 1 // the number of shader programs
+#define SHADER_PROGRAM_NUM 5 // the number of shader programs
 #define INNER_TESS_LEVEL_NUM 2
 #define OUTER_TESS_LEVEL_NUM 4
 #define MIN_TESS_LEVEL 1 // minimum tesselation level
@@ -66,13 +66,18 @@ void TesselationModesApp::init()
 	UpdateTitle();
 
 	// 46. Initialize tesselation inner & outer levels ...
-
+	TessLevelInner[0] = 2.0f;
+	TessLevelInner[1] = 3.0f;
+	TessLevelOuter[0] = 4.0f;
+	TessLevelOuter[1] = 5.0f;
+	TessLevelOuter[2] = 6.0f;
+	TessLevelOuter[3] = 7.0f;
 
 }
 //-------------------------Do the startup ------------------------
 static const char *tess_shaders_names[] =
 { // TCS & TES shaders' names
-	"Quads", "Triangles", "Isolines"
+	"Quads", "Triangles", "Isolines", "Cyclo"
 };
 void TesselationModesApp::startup()
 {
@@ -111,7 +116,6 @@ void TesselationModesApp::startup()
 		// 23. Load tesselation evaluation shader ...
 		sprintf(shaderName, "Shaders/%s.tes", tess_shaders_names[i]);
 		tes = sb6::shader::load(shaderName, GL_TESS_EVALUATION_SHADER);
-
 
 		// 24. Compile tesselation evaluation shader ...
 		glCompileShader(tes);
@@ -179,14 +183,22 @@ void TesselationModesApp::render( double currentTime )
 	GLint uniformLoc;
 
 	// 47. Get location of a TessLevelInner ...
+	uniformLoc = glGetUniformLocation(program[program_index], "TessLevelInner");
 
 
 	// 48. Set the parameter's value ...
-
+	if (uniformLoc != -1)
+	{
+		glUniform2fv(uniformLoc, 1, TessLevelInner);
+	}
 
 
 	// 49. Get location of a TessLevelInner & set the parameter's value...
-
+	uniformLoc = glGetUniformLocation(program[program_index], "TessLevelOuter");
+	if (uniformLoc != -1)
+	{
+		glUniform4fv(uniformLoc, 1, TessLevelOuter);
+	}
 
 
 
@@ -200,45 +212,45 @@ void TesselationModesApp::onKey( int key, int action )
 		return;
 	switch ( key )
 	{
-		case ' ': 
+		case ' ':
 			program_index = (program_index + 1) % SHADER_PROGRAM_NUM;
 			break;
 		// 52. Increase & decrease tesselation levels according to different keystrokes
-		case 'Q': 
-
+		case 'Q':
+			DecreaseTesselationLevel(TessLevelInner[0]);
 			break;
-		case 'A': 
-
+		case 'A':
+			IncreaseTesselationLevel(TessLevelInner[0]);
 			break;
-		case 'W': 
-
+		case 'W':
+			DecreaseTesselationLevel(TessLevelInner[1]);
 			break;
-		case 'S': 
-
+		case 'S':
+			IncreaseTesselationLevel(TessLevelInner[1]);
 			break;
-		case 'E': 
-
+		case 'E':
+			DecreaseTesselationLevel(TessLevelOuter[0]);
 			break;
-		case 'D': 
-
+		case 'D':
+			IncreaseTesselationLevel(TessLevelOuter[0]);
 			break;
-		case 'R': 
-
+		case 'R':
+			DecreaseTesselationLevel(TessLevelOuter[1]);
 			break;
-		case 'F': 
-
+		case 'F':
+			IncreaseTesselationLevel(TessLevelOuter[1]);
 			break;
-		case 'T': 
-
+		case 'T':
+			DecreaseTesselationLevel(TessLevelOuter[2]);
 			break;
-		case 'G': 
-
+		case 'G':
+			IncreaseTesselationLevel(TessLevelOuter[2]);
 			break;
-		case 'Y': 
-
+		case 'Y':
+			DecreaseTesselationLevel(TessLevelOuter[3]);
 			break;
-		case 'H': 
-
+		case 'H':
+			IncreaseTesselationLevel(TessLevelOuter[3]);
 			break;
 	}
 	UpdateTitle();

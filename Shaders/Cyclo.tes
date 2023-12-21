@@ -1,0 +1,14 @@
+#version 420 core // OpenGL 4.20+
+layout (quads) in;
+
+uniform vec4 TessLevelOuter;
+
+void main( void )
+{
+	float r = mix(gl_in[0].gl_Position.x, gl_in[1].gl_Position.x, gl_TessCoord.x);
+	float t = mix(gl_in[0].gl_Position.y, gl_in[2].gl_Position.y, gl_TessCoord.y);
+	float p0 = sin(t*TessLevelOuter[2]/9)*r;
+	float p1 = cos(t*TessLevelOuter[2]/9)*r;
+	gl_Position = vec4(p0, p1, 0.0, 1.0);
+}   
+
