@@ -1,0 +1,6 @@
+#version 420 core // OpenGL 4.20+
+layout (triangles, point_mode) in;
+void main( void )
+{
+
+}                                 

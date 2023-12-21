@@ -1,0 +1,8 @@
+#version 420 core // OpenGL 4.20+
+
+layout (isolines, equal_spacing, cw) in;
+                                                                                     
+void main( void )
+{
+
+}                                                                 

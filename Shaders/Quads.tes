@@ -1,0 +1,21 @@
+#version 420 core // OpenGL 4.20+
+layout (quads) in;
+
+void main( void )
+{
+	vec4 p1, p2;
+	// 29. Set up vertex coordinates using any vector ...
+	vec4 initialCoordinates[4];
+    	initialCoordinates[0] = gl_in[0].gl_Position; 
+    	initialCoordinates[1] = gl_in[1].gl_Position; 
+    	initialCoordinates[2] = gl_in[2].gl_Position; 
+    	initialCoordinates[3] = gl_in[3].gl_Position; 
+
+
+	// 31-33. Set up tesselated vertex coordinates basing one control patches and tesselation ...
+	
+	p1 = mix(initialCoordinates[0], initialCoordinates[1], gl_TessCoord.x);
+   	p2 = mix(initialCoordinates[2], initialCoordinates[3], gl_TessCoord.x);
+
+	gl_Position = mix(p1, p2, gl_TessCoord.y);
+}                                 

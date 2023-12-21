@@ -1,0 +1,12 @@
+#version 420 core // OpenGL 4.20+
+layout (isolines) in;
+                                                                                     
+void main( void )
+{
+	float r, t;
+
+	// 44. Set up tesselated vertex coordinates basing one control patches and tesselation ...
+
+
+
+}                                                                 

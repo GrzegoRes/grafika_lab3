@@ -1,0 +1,8 @@
+#version 420 core // OpenGL 4.20+
+layout (vertices = 4) out;
+uniform vec2 TessLevelInner;
+uniform vec4 TessLevelOuter;
+void main( void )
+{
+
+}                       

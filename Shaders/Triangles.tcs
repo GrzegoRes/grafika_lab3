@@ -1,0 +1,19 @@
+#version 420 core // OpenGL 4.20+
+
+layout (vertices = 4) out;
+
+// 50. Declare uniform parameters for tesselation levels ...
+
+
+
+void main( void )
+{
+	// 37. For the first invocation (0th) set inner [0] & outer [0..2] tesselation levels ...
+
+
+
+
+	// 38. Set patch's out position based on in position ...
+
+
+}                       

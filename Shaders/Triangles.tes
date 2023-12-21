@@ -1,0 +1,10 @@
+#version 420 core // OpenGL 4.20+
+layout (triangles) in;
+
+void main( void )
+{
+	// 39. Set up tesselated vertex coordinates basing one control patches and tesselation ...
+
+
+
+}                                 
